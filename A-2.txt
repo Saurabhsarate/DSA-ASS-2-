@@ -1,0 +1,333 @@
+setoperations.py
+
+class Set:
+
+    def _init_(self,initElementsCount):
+
+        self._s=[]
+
+        for i in range(initElementsCount):
+
+            e=int(input("Enter Element{}: ".format(i+1)))
+
+            self.add(e)
+
+ 
+
+    def get_set(self):
+
+        return self._s
+
+ 
+
+    def _str_(self):
+
+        string="\n{ "
+
+        for i in range(len(self.get_set())):
+
+            string=string+str(self.get_set()[i])
+
+            if i != len(self.get_set())-1:
+
+                string=string+" , "
+
+        string=string+" }\n"
+
+        return string
+
+ 
+
+    #return num of items in set
+
+    def _len_(self):
+
+        return len(self._s)
+
+ 
+
+    #check an element is in the set
+
+    def _contains_(self,e):
+
+        return e in self._s
+
+ 
+
+    #check if set is empty
+
+    def isEmpty(self):
+
+        return len(self._s)==0
+
+ 
+
+    #adds new unique element to set
+
+    def add(self, e):
+
+        if e not in self:
+
+            self._s.append(e)
+
+ 
+
+    #remove an element
+
+    def remove(self,e):
+
+        if e in self.get_set():
+
+            self.get_set().remove(e)
+
+ 
+
+    #check if set is a subset of set b
+
+    def isSubsetOf(self,setB):
+
+        for e in setB.get_set():
+
+            if e not in self.get_set():
+
+                return False
+
+        return True
+
+ 
+
+    #create union of set and set B
+
+    def union(self,setB):
+
+        newSet=self
+
+        for e in setB:
+
+            if e not in self.get_set():
+
+                newSet.add(e)
+
+        return newSet
+
+ 
+
+    #create intersection
+
+    def intersect(self,setB):
+
+        newSet=Set(0)
+
+        for i in range(len(self.get_set())):
+
+            for j in range(len(setB.get_set())):
+
+                if self.get_set()[i]==setB.get_set()[j]:
+
+                    newSet.add(self.get_set()[i])
+
+        return newSet
+
+ 
+
+    def difference(self,setB):
+
+        newSet=Set(0)
+
+        for e in self.get_set():
+
+            if e not in setB.get_set():
+
+                newSet.add(e)
+
+        return newSet
+
+ 
+
+    def _iter_(self):
+
+        return iter(self._s)                           
+
+ 
+
+
+
+
+main.py
+
+from random import choice
+
+from SetOperation import Set
+
+ 
+
+def creatSet():
+
+    n=int(input("Enter the Number of Elements in Set:"))
+
+    s=Set(n)
+
+    return s
+
+ 
+
+choice =0
+
+print("Creat Set A")
+
+s1=creatSet()
+
+print(str(s1))
+
+while choice !=10:
+
+    print("---------------------------------")
+
+    print("|Menu|")
+
+    print("|1.Add|")
+
+    print("|2.Remove|")
+
+    print("|3.Contains|")
+
+    print("|4.Size|")
+
+    print("|5.Intersection|")
+
+    print("|6.Union|")
+
+    print("|7.Difference|")
+
+    print("|8.Subset|")
+
+    print("|9.Exit|")
+
+ 
+
+ 
+
+    choice =int(input("Enter the Choice"))
+
+ 
+
+    if choice==1:
+
+        e=int(input("Enter the Number to Add"))
+
+        s1.add(e)
+
+        print(str(s1))
+
+ 
+
+    elif choice==2:
+
+        e=int(input("Entet the Number to Remove"))
+
+        s1.remove(e)
+
+        print(str(s1))
+
+ 
+
+    elif choice==3:
+
+        e=int(input("Enter the NUmber to Search"))
+
+        if e in s1:
+
+            print("Number is Present")
+
+        else:
+
+            print("Number is Not Present")
+
+        print(str(s1))
+
+ 
+
+    elif choice==4:
+
+        #print("Set Contains [] Elements".format(len(s1)))
+
+        print(f"Set Contains {len(s1)} Elements")
+
+   
+
+    elif choice==5:
+
+        print("Create a Set B for  doing Intersection Operation")
+
+        s2=creatSet()
+
+        s3=s1.intersect(s2)
+
+        print("Set A="+str(s1))
+
+        print("Set B="+str(s2))
+
+        print("InterSection="+str(s3))
+
+ 
+
+    elif choice==6:
+
+        print("Create a Set B for Doing Union Operation")
+
+        s2=creatSet()
+
+        s3=s1.union(s2)
+
+        print("Set A="+str(s1))
+
+        print("Set B="+str(s2))
+
+        print("Union ="+str(s3))
+
+ 
+
+    elif choice==7:
+
+        print("Create a set B for calculating set difference")
+
+        s2=creatSet()
+
+        s3=s1.difference(s2)
+
+        print("Set A="+str(s1))
+
+        print("Set B="+str(s2))
+
+        print("Difference="+str(s3))
+
+ 
+
+    elif choice==8:
+
+        print("Create a set B for checking subset or not")
+
+        s2=creatSet()
+
+        isSubset = s1.isSubsetOf(s2)
+
+        print("Set A="+str(s1))
+
+        print("Set B="+str(s2))
+
+        if isSubset:
+
+            print("Set B is the subset of set A")
+
+        else:
+
+            print("Set B is not the subset of set A")
+
+    elif choice==9:
+
+        break
+
+    elif choice<1 or choice>9:
+
+        print("Please enter valid choice")
+
