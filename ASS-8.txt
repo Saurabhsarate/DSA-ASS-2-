@@ -1,0 +1,140 @@
+#include<iostream>
+using namespace std;
+
+class maxhp{
+    int maxheap[20],n,minheap[20];
+    
+    public:
+    maxhp(){
+        maxheap[0]=0;
+        minheap[0]=0;
+        getdata();
+    }
+    
+    void putdata(int maxheap[],int n);
+    void insert_maxheap(int maxheap[],int x);
+    void upadjust_maxheap(int maxheap[],int i);
+    void getdata();
+    
+};
+
+void maxhp::getdata(){
+    int x;
+    cout<<"Enter the number of students";
+    cin>>n;
+    cout<<"Enter the marks in maxheap";
+    for(int i=0;i<n;i++){
+        cin>>x;
+        insert_maxheap(maxheap,x);
+    }
+    putdata(maxheap,n);
+
+}
+
+void maxhp::insert_maxheap(int maxheap[],int x){
+    int n;
+    n=maxheap[0];
+    maxheap[n+1]=x;
+    maxheap[0]=n+1;
+    upadjust_maxheap(maxheap,n+1);
+}
+
+
+void maxhp::upadjust_maxheap(int maxheap[],int i){
+    int temp;
+    while(i>1 && maxheap[i]>maxheap[i/2]){
+        temp=maxheap[i];
+        maxheap[i]=maxheap[i/2];
+        maxheap[i/2]=temp;
+        i=i/2;
+    }
+}
+
+void maxhp::putdata(int maxheap[],int n){
+    for(int i=0;i<=n;i++){
+        cout<<"Max Heap Array["<<i<<"] :"<<maxheap[i]<<endl;
+    }
+}
+
+
+
+class minhp{
+    int n,minheap[20];
+    
+    public:
+    minhp(){
+        minheap[0]=0;
+        getdata();
+    }
+    
+    void putdata(int minheap[],int n);
+    void insert_minheap(int minheap[],int x);
+    void upadjust_minheap(int minheap[],int i);
+    void getdata();
+};
+
+void minhp::getdata(){
+    int x;
+    cout<<"Enter the number of students";
+    cin>>n;  
+    cout<<"Enter the marks in minheap";
+    for(int i=0;i<n;i++){
+        cin>>x;
+        insert_minheap(minheap,x);
+    }
+    putdata(minheap,n);
+
+}
+
+void minhp::insert_minheap(int minheap[],int x){ 
+    int n;
+    n=minheap[0];
+    minheap[n+1]=x;
+    minheap[0]=n+1;
+    upadjust_minheap(minheap,n+1);
+}
+
+void minhp::upadjust_minheap(int minheap[],int i){
+    int temp;
+    while(i>1 && minheap[i]<minheap[i/2]){
+        temp=minheap[i];
+        minheap[i]=minheap[i/2];
+        minheap[i/2]=temp;
+        i=i/2;
+    }
+}
+
+void minhp::putdata(int minheap[],int n){
+    for(int i=0;i<=n;i++){
+        cout<<"Min Heap Array["<<i<<"] :"<<minheap[i]<<endl;
+    }
+}
+
+int main(){
+    maxhp *obj=new maxhp();
+    minhp *obj1=new minhp();
+    
+}
+
+##############ALGORITHM##########################
+
+Step1-Create a new node at the end of heap
+step2-Assign new value to the node
+step3-compare the value of this child node
+step4-if value of parent is less than child
+step5-Repeat step 3&4 until head property holds
+
+note-IN min heap construction algorithm we expect the value of the parent mode to be less than that of th child node
+
+input-30,33,42,10,14,19,27,44,16,31
+
+max heap delection algorithm
+
+step1-remove root mode
+step2-move the last elements of the last level to root
+step3-compare the value of this child node
+step4-if value of parent is less than child
+step5-repeat step 3&4 until heap property holds
+
+
+
